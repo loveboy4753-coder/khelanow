@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080f1c">
+<title>KhelaNow - Live Sports</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080f1c;color:white;font-family:Arial,sans-serif}
+header{padding:22px 18px;background:#101b2d}
+.logo{font-size:27px;font-weight:bold;color:#28df9b}
+.sub{color:#aab7c8;font-size:13px;margin-top:7px}
+nav{display:flex;gap:10px;overflow:auto;padding:15px}
+nav button{background:#18263a;color:white;border:1px solid #34445c;border-radius:20px;padding:11px 17px;white-space:nowrap}
+nav button.active{background:#20bd82;color:#061a14}
+h3{margin:20px 18px 12px}
+.card{margin:12px 15px;background:#142238;border:1px solid #293b54;border-radius:14px;padding:16px}
+.row{display:flex;justify-content:space-between;align-items:center}
+.league{font-size:12px;color:#aab7c8}
+.live{color:#ff6464;font-size:12px}
+.team{font-size:16px;margin-top:14px}
+.score{font-size:21px;font-weight:bold}
+.status{font-size:12px;color:#aab7c8;margin-top:12px}
+footer{text-align:center;color:#718096;padding:25px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">⚽ KhelaNow</div>
+<div class="sub">ALL SPORTS • LIVE SCORES • SPORTS NEWS</div>
+</header>
+
+<nav id="tabs">
+<button class="active" onclick="show('All',this)">All</button>
+<button onclick="show('Football',this)">⚽ Football</button>
+<button onclick="show('Cricket',this)">🏏 Cricket</button>
+<button onclick="show('Basketball',this)">🏀 Basketball</button>
+<button onclick="show('Tennis',this)">🎾 Tennis</button>
+<button onclick="show('Volleyball',this)">🏐 Volleyball</button>
+</nav>
+
+<h3 id="heading">🏆 All Matches</h3>
+<div id="matches"></div>
+
+<footer>
+KhelaNow © 2026<br>
+Your World of Sports
+</footer>
+
+<script>
+const games=[
+{sport:"Football",league:"Premier League",a:"Arsenal",b:"Chelsea",score:"2 - 1",time:"Sample match"},
+{sport:"Football",league:"La Liga",a:"Real Madrid",b:"Barcelona",score:"1 - 1",time:"Sample match"},
+{sport:"Cricket",league:"International Cricket",a:"Bangladesh",b:"India",score:"156/4",time:"Sample match"},
+{sport:"Cricket",league:"T20 Cricket",a:"Australia",b:"Pakistan",score:"120/3",time:"Sample match"},
+{sport:"Basketball",league:"Basketball",a:"Lakers",b:"Warriors",score:"98 - 92",time:"Sample match"},
+{sport:"Tennis",league:"Tennis",a:"Player A",b:"Player B",score:"1 - 0",time:"Sample match"},
+{sport:"Volleyball",league:"Volleyball",a:"Team A",b:"Team B",score:"2 - 1",time:"Sample match"}
+];
+
+function show(sport,btn){
+document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+document.getElementById("heading").innerText=
+sport==="All"?"🏆 All Matches":"🏆 "+sport+" Matches";
+const list=games.filter(g=>sport==="All"||g.sport===sport);
+document.getElementById("matches").innerHTML=list.map(g=>`
+<div class="card">
+<div class="row">
+<span class="league">${g.league}</span>
+<span class="live">● SAMPLE</span>
+</div>
+<div class="row">
+<div class="team">${g.a}</div>
+<div class="score">${g.score}</div>
+</div>
+<div class="row">
+<div class="team">${g.b}</div>
+</div>
+<div class="status">${g.time} • Demo data, not live</div>
+</div>`).join("");
+}
+show("All",document.querySelector("nav button"));
+</script>
+</body>
+</html>
